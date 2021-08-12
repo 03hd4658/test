@@ -7,19 +7,11 @@ pipeline{
     stages{
         stage ('terraform init and apply for Dev'){
             steps{
-                sh returnStatus: true, script: 'terraform workspace new dev'
                 sh "terraform init"
+                sh "terraform plan"
                 sh "terraform apply --auto-approve"
             }
-        }
-
-        stage ('terraform init and apply for Prod'){
-            steps{
-                sh returnStatus: true, script: 'terraform workspace new prod'
-                sh "terraform init"
-                sh "terraform apply --auto-approve"
-            }
-        }
+        }        
     }
 }
 
